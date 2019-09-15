@@ -1,10 +1,17 @@
+import { Context } from './context';
+import { PiStorage } from './storage/PiStorage';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import { buildSchema } from 'graphql';
+import sqlite3 from 'sqlite3';
+import { makeExecutableSchema } from 'graphql-tools';
 import { Registry } from './registry/registry';
 import RegistryPackage from './registry/Package';
 import { merge } from './merge';
-import { makeExecutableSchema } from 'graphql-tools';
+
+// Initing storage
+let db = new sqlite3.Database(__dirname + '/data.sqlite');
+let storage = new PiStorage(db);
+Context.setStorage(storage);
 
 // Initing registry
 const registry = new Registry();
@@ -16,7 +23,7 @@ for (let p of registry.packages) {
 // Schema and resolvers
 let schema = makeExecutableSchema({
   typeDefs: registry.packages.map((v) => v.schema).join('\n'),
-  resolvers:  merge(...registry.packages.map((v) => v.resolver))
+  resolvers: merge(...registry.packages.map((v) => v.resolver))
 });
 
 // Run server
