@@ -1,0 +1,11 @@
+type Package {
+    name: String!
+}
+
+type Query {
+    packages: [Package!]!
+}
+
+type Mutation {
+    addPackage(name: String!): Package!
+}

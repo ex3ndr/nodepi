@@ -1,26 +1,28 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import { buildSchema } from 'graphql';
+import { Registry } from './registry/registry';
+import RegistryPackage from './registry/Package';
+import { merge } from './merge';
+import { makeExecutableSchema } from 'graphql-tools';
 
-// Schema
-var schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
+// Initing registry
+const registry = new Registry();
+registry.add(RegistryPackage);
+for (let p of registry.packages) {
+  console.log('Loaded ' + p.name + ' package');
+}
 
-// Resolvers
-var root = {
-  hello: () => {
-    return 'Hello world!';
-  },
-};
+// Schema and resolvers
+let schema = makeExecutableSchema({
+  typeDefs: registry.packages.map((v) => v.schema).join('\n'),
+  resolvers:  merge(...registry.packages.map((v) => v.resolver))
+});
 
 // Run server
 var app = express();
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: root,
   graphiql: true,
 }));
 app.get('/', (req, res) => res.send('Hello World!'));
