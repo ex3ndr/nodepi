@@ -8,6 +8,6 @@ type Query {
 }
 
 type Mutation {
-    addPackage(name: String!): Package!
+    addPackage(name: String!, version: String!): Package!
     restartServer: Boolean!
 }
