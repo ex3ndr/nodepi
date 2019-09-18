@@ -1,4 +1,4 @@
-import { PiStorage } from './storage/PiStorage';
+import { PiStorage } from '../storage/PiStorage';
 class ContextHolder {
     storage!: PiStorage | undefined;
 

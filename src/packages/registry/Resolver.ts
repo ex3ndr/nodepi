@@ -1,4 +1,4 @@
-import { Context } from './../context';
+import { Context } from '../api/context';
 export const RegistryResolver = {
     Package: {
         name: (src: string) => src
