@@ -20,3 +20,7 @@ export function readRegistry(path: string): { name: string, version: string }[] 
     }
     return res;
 }
+
+export function writeRegistry(path: string, registry: { name: string, version: string }[]) {
+    fs.writeFileSync(path, JSON.stringify(registry));
+}
