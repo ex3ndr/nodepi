@@ -1,10 +1,13 @@
 {
   "name": "nodepi-server",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "https://github.com/ex3ndr/nodepi.git",
   "author": "Steve Korshakov <steve@korshakov.com>",
   "license": "MIT",
+  "files": [
+    "build/**/*"
+  ],
   "scripts": {
     "build": "tsc && cpx ./src/packages/registry/Schema.graphql ./build/registry/ && cpx ./src/packages/launcher/index.js ./build/launcher/"
   },

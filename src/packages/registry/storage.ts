@@ -22,5 +22,5 @@ export function readRegistry(path: string): { name: string, version: string }[] 
 }
 
 export function writeRegistry(path: string, registry: { name: string, version: string }[]) {
-    fs.writeFileSync(path, JSON.stringify(registry));
+    fs.writeFileSync(path, JSON.stringify({ packages: registry }));
 }
