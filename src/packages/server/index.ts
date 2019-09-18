@@ -1,22 +1,28 @@
 import { Context } from '../api/context';
-import { PiStorage } from '../storage/PiStorage';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import sqlite3 from 'sqlite3';
 import { makeExecutableSchema } from 'graphql-tools';
 import { Registry } from '../registry/registry';
 import RegistryPackage from '../registry/Package';
 import { merge } from './merge';
+import fs from 'fs';
+// import { readRegistry } from '../registry/storage';
 
 // Initing storage
+const root = (process.env.STORAGE_PATH || __dirname);
+if (!fs.existsSync(root)) {
+  fs.mkdirSync(root);
+}
 
-let db = new sqlite3.Database((process.env.STORAGE_PATH || __dirname) + '/data.sqlite');
-let storage = new PiStorage(db);
-Context.setStorage(storage);
+// const registryData = readRegistry(root + '/registry.json');
+Context.setDataPath(root);
 
 // Initing registry
 const registry = new Registry();
 registry.add(RegistryPackage);
+// for(let p of registryData) {
+//   registry.add(p.name)
+// }
 for (let p of registry.packages) {
   console.log('Loaded ' + p.name + ' package');
 }

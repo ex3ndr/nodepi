@@ -1,9 +1,8 @@
-import { PiStorage } from '../storage/PiStorage';
 class ContextHolder {
-    storage!: PiStorage | undefined;
+    dataPath!: string;
 
-    setStorage(storage: PiStorage) {
-        this.storage = storage;
+    setDataPath(path: string) {
+        this.dataPath = path;
     }
 }
 
