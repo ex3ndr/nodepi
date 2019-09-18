@@ -1,5 +1,6 @@
 type Package {
     name: String!
+    version: String!
 }
 
 type Query {
