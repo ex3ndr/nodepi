@@ -2,16 +2,14 @@ import { Context } from '../api/context';
 import { PiStorage } from '../storage/PiStorage';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import sqlite3 from 'sqlite3';
+// import sqlite3 from 'sqlite3';
 import { makeExecutableSchema } from 'graphql-tools';
 import { Registry } from '../registry/registry';
 import RegistryPackage from '../registry/Package';
 import { merge } from './merge';
 
 // Initing storage
-
-let db = new sqlite3.Database((process.env.STORAGE_PATH || __dirname) + '/data.sqlite');
-let storage = new PiStorage(db);
+let storage = new PiStorage((process.env.STORAGE_PATH || __dirname));
 Context.setStorage(storage);
 
 // Initing registry
