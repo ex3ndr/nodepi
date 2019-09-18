@@ -35,7 +35,7 @@ fs.mkdirSync(root + '/modules/');
 fs.writeFileSync(root + '/modules/package.json', JSON.stringify({
     name: 'nodepi_modules',
     dependencies: {
-        'rimraf': '*'
+        'nodepi': 'github:ex3ndr/nodepi'
     }
 }));
 

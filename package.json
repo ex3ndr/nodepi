@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc && cpx ./src/packages/registry/Schema.graphql ./build/registry/",
-    "start": "yarn build && STORAGE_PATH=`pwd`/data node ./build/launcher/index.js"
+    "start": "yarn build && STORAGE_PATH=`pwd`/data node ./build/launcher/index.js",
+    "postinstall": "tsc && cpx ./src/packages/registry/Schema.graphql ./build/registry/"
   },
   "dependencies": {
     "@types/express": "^4.17.1",
