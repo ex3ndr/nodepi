@@ -9,7 +9,7 @@ import fs from 'fs';
 // import { readRegistry } from '../registry/storage';
 
 // Initing storage
-const root = (process.env.STORAGE_PATH || __dirname);
+const root = (process.env.STORAGE_PATH || process.cwd());
 if (!fs.existsSync(root)) {
   fs.mkdirSync(root);
 }
