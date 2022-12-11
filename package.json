@@ -12,7 +12,7 @@
     "build": "tsc && cpx ./src/packages/registry/Schema.graphql ./build/registry/ && cpx ./src/packages/launcher/index.js ./build/launcher/"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.5",
     "graphql-tools": "^4.0.5"
